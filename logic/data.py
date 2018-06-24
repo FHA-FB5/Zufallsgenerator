@@ -14,10 +14,7 @@ def add_person(person, filepath: str):
     '''
     filepath = Path(filepath)
     if not filepath.exists():
-        try:
-            Path(filepath.parent).mkdir(parents=True)
-        except FileExistsError:
-            pass
+        Path(filepath.parent).mkdir(parents=True, exist_ok=True)
         with filepath.open('w') as file:
             json.dump({}, file)
     with filepath.open() as file:
