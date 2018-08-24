@@ -1,4 +1,4 @@
-MAIN_FILE=main.py
+INFO=
 
 all:
 	@echo "cmd:"
@@ -8,13 +8,18 @@ all:
 	@echo "  mrproper   remove pyenv"
 
 install:
-	virtualenv venv;
-	. ${PWD}/venv/bin/activate
-	pip install -r requirements.txt
+	( \
+	virtualenv venv; \
+	source ${PWD}/venv/bin/activate; \
+	pip install -r requirements.txt; \
+	)
 
 run:
-	. ${MAIN_FILE}/venv/bin/activate
-	python3 main.py
+	( \
+	. ${PWD}/bin/activate; \
+	python3 main.py; \
+	)
 
 mrproper:
 	rm -rf ./venv/
+
