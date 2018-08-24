@@ -8,7 +8,7 @@ all:
 	@echo "  mrproper   remove pyenv"
 
 install:
-	virtualenv venv
+	virtualenv venv;
 	. ${PWD}/venv/bin/activate
 	pip install -r requirements.txt
 

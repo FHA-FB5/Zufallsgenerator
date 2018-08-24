@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Show</title>
-    <link rel="stylesheet" href="static/stylesheet.css" type="text/css">
-    <script src="static/show.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href={{ url_for('static', filename='stylesheet.css') }}>
+    <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script>
+        $(document).ready(function () {
+            let socket = io.connect(
+                location.protocol + '//' + document.domain + ':' + location.port
+            );
+
+            socket.on('start', function () {
+                let stage = $('#stage');
+                console.log(stage.html());
+                stage.html('Running')
+            });
+
+            socket.on('stop', function (message) {
+                $('#stage').html('Completed<br> Winner is ' + message.winner)
+            });
+
+        });
+    </script>
 </head>
 <body>
-    <div id="main">
-        <h2>This is the show page</h2><br>
-        <div id="stage">Not running</div>
-    </div>
+<div id="main">
+    <h2>This is the show page</h2><br>
+    <div id="stage">Not running</div>
+</div>
 </body>
 </html>

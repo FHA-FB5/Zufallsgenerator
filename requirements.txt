@@ -1,1 +1,4 @@
-flask
+flask>=1.0.2
+flask-socketio>=3.0.1
+gevent>=1.3.6
+gevent-websocket>=0.10.1

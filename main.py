@@ -1,17 +1,14 @@
-from flask import Flask, url_for, render_template, jsonify
+from flask import Flask, render_template, jsonify
 from os import listdir
 from os.path import join, abspath, dirname
 from typing import List
-import websockets
-import asyncio
-import json
-from threading import Thread
+from flask_socketio import SocketIO, emit
 
 ROOT_DIR = dirname(abspath(__file__))
 STATIC_DIR = join(ROOT_DIR, 'static')
 
 app = Flask(__name__)
-client = None
+socketio = SocketIO(app)
 students = None
 
 
@@ -27,12 +24,14 @@ class Student:
 
 @app.route('/')
 def show(**kwargs):
-    return render_template('show.html', **kwargs)
+    return render_template('show.html', async_mode=socketio.async_mode,
+                           **kwargs)
 
 
 @app.route('/settings')
 def settings(**kwargs):
-    return render_template('settings.html', **kwargs)
+    return render_template('settings.html', async_mode=socketio.async_mode,
+                           **kwargs)
 
 
 @app.route('/students', methods=['GET'])
@@ -40,26 +39,26 @@ def students():
     return jsonify({'students': students})
 
 
-@app.route('/start', methods=['GET'])
-async def start():
-    await client.send(json.dumps({'type': 'start'}))
+@socketio.on('start')
+def start():
+    print('start')
+    socketio.emit('start')
 
 
-@app.route('/stop/<id>', methods=['GET'])
-async def stop(id: int):
-    winner = next(student for student in students if student['id'] == id)
-    await client.send(json.dumps({'type': 'stop',
-                                  'winner': winner['name']}))
+@socketio.on('stop')
+def stop(message):
+    print('stop')
+    socketio.emit('stop', {'winner': message['winner']})
 
 
-async def handler(websocket, path):
-    client = websocket
+@socketio.on('connect')
+def on_connect():
+    print('Client connected')
 
 
-@app.route('/static/<filepath>', methods=['GET'])
-def static_files(filepath):
-    return url_for('static', filename=filepath)
-
+@socketio.on('disconnect')
+def on_disconnect():
+    print('Client disconnected')
 
 if __name__ == '__main__':
     """
@@ -73,12 +72,4 @@ if __name__ == '__main__':
         student = Student(index, ' '.join(name),
                           major, f'static/students/{image}')
         students.append(student.__dict__)
-
-    def websocket_server():
-        asyncio.get_event_loop().run_until_complete(
-            websockets.serve(handler, 'localhost', 6666)
-        )
-        asyncio.get_event_loop().run_forever()
-
-    Thread(target=websocket_server).start()
-    app.run(host='localhost', port=8080, debug=True)
+    socketio.run(app, debug=True)
