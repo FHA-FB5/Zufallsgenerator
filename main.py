@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from os import listdir
 from os.path import join, abspath, dirname
 from typing import List
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
 
 ROOT_DIR = dirname(abspath(__file__))
 STATIC_DIR = join(ROOT_DIR, 'static')
@@ -59,6 +59,7 @@ def on_connect():
 @socketio.on('disconnect')
 def on_disconnect():
     print('Client disconnected')
+
 
 if __name__ == '__main__':
     """
