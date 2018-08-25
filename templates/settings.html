@@ -12,6 +12,7 @@
          let socket = io.connect(
              location.protocol + '//' + document.domain + ':' + location.port
          );
+         let selected = 0;
 
          $('#start').click(function () {
              console.log('start');
@@ -19,7 +20,13 @@
          });
 
          $('#stop').submit(function () {
-             socket.emit('stop', {winner: $("input[name='winner']:checked").val()})
+             socket.emit('stop', {winner: selected})
+         });
+
+         $('img.student').click(function () {
+             $('img#' + selected).css({border: '3px solid lightblue'});
+             selected = parseInt($(this).attr('id'));
+             $(this).css({border: '3px solid red'})
          })
      })
     </script>
