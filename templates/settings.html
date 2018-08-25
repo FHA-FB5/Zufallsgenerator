@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Settings</title>
-    <link rel="stylesheet" type="text/css"
-          href={{ url_for('static', filename='stylesheet.css') }}>
-    <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script>
-     $(document).ready(function () {
-         let socket = io.connect(
-             location.protocol + '//' + document.domain + ':' + location.port
-         );
-         let selected = 0;
+  <meta charset="UTF-8">
+  <title>Settings</title>
+  <link rel="stylesheet" type="text/css"
+        href={{ url_for('static', filename='stylesheet.css') }}>
+  <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script>
+      $(document).ready(function () {
+          let socket = io.connect(
+              location.protocol + '//' + document.domain + ':' + location.port
+          );
+          let selected = 0;
 
-         $('#start').click(function () {
-             console.log('start');
-             socket.emit('start')
-         });
+          $('#start').click(function () {
+              console.log('start');
+              socket.emit('start')
+          });
 
-         $('#stop').submit(function () {
-             socket.emit('stop', {winner: selected})
-         });
+          $('#stop').submit(function () {
+              socket.emit('stop', {winner: selected})
+          });
 
-         $('img.student').click(function () {
-             $('img#' + selected).css({border: '3px solid lightblue'});
-             selected = parseInt($(this).attr('id'));
-             $(this).css({border: '3px solid red'})
-         })
-     })
-    </script>
+          $('img.student').click(function () {
+              $('img#' + selected).css({border: '3px solid lightblue'});
+              selected = parseInt($(this).attr('id'));
+              $(this).css({border: '3px solid red'})
+          })
+      })
+  </script>
 </head>
 <body>
 <div id="main">
@@ -41,10 +41,10 @@
     <div class="students">
       {% for student in students %}
         <div class="student">
-            <img src="{{ student.image_path }}" class="student"
-                 id="{{ student.id }}" width="150px" height="150px"/>
-            <br>
-            {{ student.name }}
+          <img src="{{ student.image_path }}" class="student"
+               id="{{ student.id }}" width="150px" height="150px"/>
+          <br>
+          {{ student.name }}
         </div>
       {% endfor %}
     </div>
