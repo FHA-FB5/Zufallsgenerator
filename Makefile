@@ -11,14 +11,15 @@ install:
 	( \
 	virtualenv venv; \
 	source ${PWD}/venv/bin/activate; \
-	pip install -r req.txt; \
+	pip install -r requirements.txt; \
 	)
 
 run:
 	( \
-	. ${PWD}/bin/activate; \
+	. ${PWD}/venv/bin/activate; \
 	python3 main.py; \
 	)
 
 mrproper:
 	rm -rf ./venv/
+
