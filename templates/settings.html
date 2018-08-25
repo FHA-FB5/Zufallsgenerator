@@ -26,29 +26,30 @@
           $('img.student').click(function () {
               $('img#' + selected).css({border: '3px solid lightblue'});
               selected = parseInt($(this).attr('id'));
-              $(this).css({border: '3px solid red'})
+              $(this).css({border: '5px solid red'})
           })
       })
   </script>
 </head>
 <body>
-<div id="main">
-  <div class="content">
-    <h2>This is the settings page</h2><br>
+<div id="navbar">
+  <div class="dummy"></div>
+  <div id="navbar-title">Settings</div>
+  <div id="navbar-buttons">
     <button id="start">Start</button>
     <button id="stop">Stop</button>
-    <br>
-    <div class="students">
-      {% for student in students %}
-        <div class="student">
-          <img src="{{ student.image_path }}" class="student"
-               id="{{ student.id }}" width="150px" height="150px"/>
-          <br>
-          {{ student.name }}
-        </div>
-      {% endfor %}
-    </div>
   </div>
+</div>
+<br>
+<div id="students">
+  {% for student in students %}
+    <div class="student">
+      <img src="{{ student.image_path }}" class="student"
+           id="{{ student.id }}" width="150px" height="150px"/>
+      <br>
+      {{ student.name }}
+    </div>
+  {% endfor %}
 </div>
 </body>
 </html>
