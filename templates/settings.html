@@ -19,7 +19,7 @@
               socket.emit('start')
           });
 
-          $('#stop').submit(function () {
+          $('#stop').click(function () {
               socket.emit('stop', {winner: selected})
           });
 
@@ -36,7 +36,7 @@
   <div class="content">
     <h2>This is the settings page</h2><br>
     <button id="start">Start</button>
-    <button id="submit">Stop</button>
+    <button id="stop">Stop</button>
     <br>
     <div class="students">
       {% for student in students %}
