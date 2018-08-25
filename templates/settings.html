@@ -25,24 +25,23 @@
     </script>
 </head>
 <body>
-  <div id="main">
-    <div class="content">
-      <h2>This is the settings page</h2><br>
-      <form id="stop">
-        <button id="start">Start</button><input type="submit" value="send">
-        <br>
-        <br>
-        {% for student in students %}
-          <div>
-            <label for="{{ student.id }}">
-            <input type="radio" name="winner" id="{{ student.id }}" value="{{ student.id }}">
-            <img src="{{ student.image_path }}" width="50px" height="50px" />
+<div id="main">
+  <div class="content">
+    <h2>This is the settings page</h2><br>
+    <button id="start">Start</button>
+    <button id="submit">Stop</button>
+    <br>
+    <div class="students">
+      {% for student in students %}
+        <div class="student">
+            <img src="{{ student.image_path }}" class="student"
+                 id="{{ student.id }}" width="150px" height="150px"/>
             <br>
-            {{ student.name }}</label>
-          </div>
-        {% endfor %}
-      </form>
+            {{ student.name }}
+        </div>
+      {% endfor %}
     </div>
   </div>
+</div>
 </body>
 </html>
