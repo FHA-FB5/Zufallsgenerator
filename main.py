@@ -30,7 +30,8 @@ def show(**kwargs):
 
 @app.route('/settings')
 def settings(**kwargs):
-    return render_template('settings.html', async_mode=socketio.async_mode,
+    return render_template('settings.html', students=students,
+                           async_mode=socketio.async_mode,
                            **kwargs)
 
 

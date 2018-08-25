@@ -8,31 +8,41 @@
     <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script>
-        $(document).ready(function () {
-            let socket = io.connect(
-                location.protocol + '//' + document.domain + ':' + location.port
-            );
+     $(document).ready(function () {
+         let socket = io.connect(
+             location.protocol + '//' + document.domain + ':' + location.port
+         );
 
-            $('#start').click(function () {
-                console.log('start');
-                socket.emit('start')
-            });
+         $('#start').click(function () {
+             console.log('start');
+             socket.emit('start')
+         });
 
-            $('#stop').submit(function () {
-                socket.emit('stop', {winner: $('#winner').val()})
-            })
-        })
+         $('#stop').submit(function () {
+             socket.emit('stop', {winner: $("input[name='winner']:checked").val()})
+         })
+     })
     </script>
 </head>
 <body>
-<div id="main">
-    <h2>This is the settings page</h2><br>
-    <button id="start">Start</button>
-    <br>
-    <form id="stop">
-        <input type="text" title="Winner" id="winner">
-        <input type="submit">
-    </form>
-</div>
+  <div id="main">
+    <div class="content">
+      <h2>This is the settings page</h2><br>
+      <form id="stop">
+        <button id="start">Start</button><input type="submit" value="send">
+        <br>
+        <br>
+        {% for student in students %}
+          <div>
+            <label for="{{ student.id }}">
+            <input type="radio" name="winner" id="{{ student.id }}" value="{{ student.id }}">
+            <img src="{{ student.image_path }}" width="50px" height="50px" />
+            <br>
+            {{ student.name }}</label>
+          </div>
+        {% endfor %}
+      </form>
+    </div>
+  </div>
 </body>
 </html>
