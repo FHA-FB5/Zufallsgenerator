@@ -1,3 +1,13 @@
 body{
     text-align: center;
 }
+
+img.student{
+    border: 3px lightblue solid;
+}
+
+div.student{
+    display: inline-block;
+    margin: 10px;
+    font-size: 13px;
+}
