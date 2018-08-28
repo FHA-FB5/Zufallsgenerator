@@ -24,20 +24,14 @@ class Student:
 
 @app.route('/')
 def show(**kwargs):
-    return render_template('show.html', async_mode=socketio.async_mode,
-                           **kwargs)
+    return render_template('show.html', students=students,
+                           async_mode=socketio.async_mode, **kwargs)
 
 
 @app.route('/settings')
 def settings(**kwargs):
     return render_template('settings.html', students=students,
-                           async_mode=socketio.async_mode,
-                           **kwargs)
-
-
-@app.route('/students', methods=['GET'])
-def students():
-    return jsonify({'students': students})
+                           async_mode=socketio.async_mode, **kwargs)
 
 
 @socketio.on('start')
@@ -50,6 +44,12 @@ def start():
 def stop(message):
     print('stop')
     socketio.emit('stop', {'winner': message['winner']})
+
+
+@socketio.on('students')
+def students():
+    print('students')
+    socketio.emit('students', {'students': students})
 
 
 @socketio.on('connect')
