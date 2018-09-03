@@ -34,3 +34,11 @@ div.student{
     margin: 10px;
     font-size: 13px;
 }
+
+.slider img{
+    height: 500px;
+}
+div.bx-wrapper{
+    margin: 0 auto;
+    border: 0 !important;
+}
