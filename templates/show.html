@@ -5,10 +5,9 @@
     <title>Show</title>
     <link rel="stylesheet" type="text/css"
           href={{ url_for('static', filename='stylesheet.css') }}>
-    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='wheen.min.css') }}>
     <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script src="{{ url_for('static', filename='show.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='wheel.js') }}"></script>
     <script>
         $(document).ready(function () {
             let socket = io.connect(
@@ -19,32 +18,44 @@
                 let stage = $('#stage');
                 console.log(stage.html());
                 stage.html('Running');
-                startWheel();
+                wheel_start();
             });
 
             socket.on('stop', function (message) {
                 $('#stage').html('Completed<br> Winner is ' + message.winner);
-                stopWheel(message.winner);
+                wheel_stop(parseInt(message.winner));
             });
 
         });
     </script>
 </head>
-<body>
-<audio id="sound" loop>
+<body id="show">
+<audio id="sound_wheel" loop>
   <source src="{{ url_for('static', filename='sound.mp3') }}" type="audio/mpeg">
 </audio>
 <audio id="sound_winner">
   <source src="{{ url_for('static', filename='winner.mp3') }}" type="audio/mpeg">
 </audio>
-<div id="main">
-    <h2>This is the show page</h2><br>
-    <div id="stage">Not running</div>
+
+<img src="{{ url_for('static', filename='Girl-left.gif') }}" id="img_left">
+
+<div id="images">
+    <div>
+        {% for student in students %}
+            <img id="{{student.id}}" src="{{student.image_path}}">
+        {% endfor %}
+    </div>
 </div>
-<div class="slider">
-    {% for student in students %}
-        <img id="{{student.id}}" src="{{student.image_path}}">
-    {% endfor %}
+
+<img src="{{ url_for('static', filename='Girl-right.gif') }}" id="img_right">
+
+<div id="winner_images">
+    <div>
+        {% for student in students %}
+            <img class="winner_image" id="{{student.id}}" src="{{student.image_path}}">
+        {% endfor %}
+    </div>
 </div>
+
 </body>
 </html>
