@@ -51,5 +51,34 @@
     </div>
   {% endfor %}
 </div>
+<script>
+    $(function(){
+    $('#stop').click(function(){
+        var btn_start = $('#start');
+        var btn_stop = $(this);
+        var time = 7000;
+        var count = Math.round(time/1000)
+        var text = 'Please wait ';
+        btn_start.prop('disabled',true);
+        btn_stop.prop('disabled',true);
+        var text_temp = text + count + ' sec';
+        btn_start.html(text_temp);
+        btn_stop.html(text_temp);
+        var countInterval = window.setInterval(function(){
+            count--;
+            text_temp = text + count + ' sec';
+            btn_start.html(text_temp);
+            btn_stop.html(text_temp);
+        }, 1000);
+        window.setTimeout(function(){
+            btn_start.html('Start');
+            btn_stop.html('Stop');
+            btn_start.prop('disabled',false);
+            btn_stop.prop('disabled',false);
+            clearInterval(countInterval);
+        },time);
+    });
+});
+</script>
 </body>
 </html>
