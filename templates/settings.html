@@ -52,33 +52,33 @@
   {% endfor %}
 </div>
 <script>
-    $(function(){
-    $('#stop').click(function(){
-        let btn_start = $('#start');
-        const btn_stop = $(this);
-        const time = 7000;
-        let count = Math.round(time / 1000);
-        const text = 'Please wait ';
-        btn_start.prop('disabled',true);
-        btn_stop.prop('disabled',true);
-        let text_temp = text + count + ' sec';
-        btn_start.html(text_temp);
-        btn_stop.html(text_temp);
-        const countInterval = window.setInterval(function () {
-            count--;
-            text_temp = text + count + ' sec';
+    $(function () {
+        $('#stop').click(function () {
+            const btn_start = $('#start');
+            const btn_stop = $(this);
+            const time = 7000;
+            let count = Math.round(time / 1000);
+            const text = 'Please wait ';
+            btn_start.prop('disabled', true);
+            btn_stop.prop('disabled', true);
+            let text_temp = text + count + ' sec';
             btn_start.html(text_temp);
             btn_stop.html(text_temp);
-        }, 1000);
-        window.setTimeout(function(){
-            btn_start.html('Start');
-            btn_stop.html('Stop');
-            btn_start.prop('disabled',false);
-            btn_stop.prop('disabled',false);
-            clearInterval(countInterval);
-        },time);
+            const countInterval = window.setInterval(function () {
+                count--;
+                text_temp = text + count + ' sec';
+                btn_start.html(text_temp);
+                btn_stop.html(text_temp);
+            }, 1000);
+            window.setTimeout(function () {
+                btn_start.html('Start');
+                btn_stop.html('Stop');
+                btn_start.prop('disabled', false);
+                btn_stop.prop('disabled', false);
+                clearInterval(countInterval);
+            }, time);
+        });
     });
-});
 </script>
 </body>
 </html>
