@@ -18,22 +18,23 @@ function wheel_start() {
     sound_wheel.pause();
     sound_wheel_j.animate({volume: 1.0}, 1000);
     sound_wheel.play();
-    images.addClass('spin').fadeIn(1000);
-    $('.winner_image.winner').removeClass('winner').fadeOut('slow');
+    let winner = $('.winner').fadeOut(1000);
+    setTimeout(function () {
+        winner.removeClass('winner');
+        images.addClass('spin').fadeIn(1000);
+    }, 1000);
 }
 
 function wheel_stop(id) {
+    let winner = $("#winners #" + id).addClass('winner');
     sound_winner.play();
     sound_wheel_j.animate({volume: 0.0}, 3500);
     images.fadeOut(2000);
     setTimeout(function () {
         images.removeClass('spin');
+        winner.fadeIn(3000);
+        setTimeout(function () {
+            sound_cheer.play();
+        }, 1000)
     }, 2000);
-    let winner = $("img#" + id + ".winner_image").addClass('winner');
-    setTimeout(function () {
-        winner.fadeIn(2500)
-    }, 2500);
-    setTimeout(function () {
-        sound_cheer.play();
-    }, 4000)
 }

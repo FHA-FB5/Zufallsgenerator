@@ -1,0 +1,36 @@
+div#navbar {
+    top: 0;
+    left: 0;
+    position: fixed;
+    min-height: 3em;
+    border-bottom: 1px solid black;
+    width: 100%;
+    background-color: rgba(240, 248, 255, 0.8);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+div#navbar-title {
+    color: #aa9972;
+    font-size: 2em;
+    margin: auto;
+}
+
+div#navbar-buttons {
+    margin: auto 2% auto auto;
+}
+
+div#students {
+    margin-top: 2%;
+    text-align: center;
+}
+
+img.student {
+    border: 3px lightblue solid;
+}
+
+div.student {
+    display: inline-block;
+    margin: 10px;
+    font-size: 13px;
+}
