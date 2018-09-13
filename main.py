@@ -3,6 +3,7 @@ from os import listdir
 from os.path import join, abspath, dirname
 from typing import List
 from flask_socketio import SocketIO
+from random import choice
 
 ROOT_DIR = dirname(abspath(__file__))
 STATIC_DIR = join(ROOT_DIR, 'static')
@@ -13,13 +14,13 @@ students = None
 
 
 class Student:
-
     def __init__(self, student_id: int, name: str, major: str,
                  image_path: str):
         self.id = student_id
         self.name = name
         self.major = major
         self.image_path = image_path
+        self.gender = choice(['male', 'female'])
 
 
 @app.route('/')
