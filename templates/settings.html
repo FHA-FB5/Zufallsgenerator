@@ -5,8 +5,10 @@
   <title>Settings</title>
   <link rel="stylesheet" type="text/css"
         href={{ url_for('static', filename='settings.css') }}>
-  <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script
+      src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
   <script>
       $(function () {
           let socket = io.connect(
@@ -21,19 +23,81 @@
 
           $('#stop').click(function () {
               socket.emit('stop', {winner: selected})
+              const btn_start = $('#start');
+              const btn_stop = $(this);
+              const time = 7000;
+              let count = Math.round(time / 1000);
+              const text = 'Please wait ';
+              btn_start.prop('disabled', true);
+              btn_stop.prop('disabled', true);
+              let text_temp = text + count + ' sec';
+              btn_start.html(text_temp);
+              btn_stop.html(text_temp);
+              const countInterval = window.setInterval(function () {
+                  count--;
+                  text_temp = text + count + ' sec';
+                  btn_start.html(text_temp);
+                  btn_stop.html(text_temp);
+              }, 1000);
+              window.setTimeout(function () {
+                  btn_start.html('Start');
+                  btn_stop.html('Stop');
+                  btn_start.prop('disabled', false);
+                  btn_stop.prop('disabled', false);
+                  clearInterval(countInterval);
+              }, time);
           });
 
           $('img.student').click(function () {
               $('img#' + selected).css({border: '3px solid lightblue'});
               selected = parseInt($(this).attr('id'));
               $(this).css({border: '3px solid red'})
-          })
+          });
+
+          function filter(){
+              let major = $('#major :selected').text();
+              let gender = $('#gender :selected').text();
+              $('#students div').each(function () {
+                  console.log($(this).hasClass(major));
+                  if ((gender === 'all' && major === 'all') ||
+                      (gender === 'all' && $(this).hasClass(major)) ||
+                      ($(this).hasClass(gender) && major === 'all') ||
+                      ($(this).hasClass(gender) && $(this).hasClass(major))) {
+                      $(this).css({
+                          display: 'inline-block'
+                      })
+                  } else {
+                      $(this).css({
+                          display: 'none'
+                      })
+                  }
+              })
+          }
+
+          $('#major').change(filter);
+
+          $('#gender').change(filter);
       })
   </script>
 </head>
 <body>
 <div id="navbar">
-  <div class="dummy"></div>
+  <div id="navbar-sort">
+    <label for="major"></label>
+    <select id="major">
+      <option value="all">all</option>
+      <option value="INF">INF</option>
+      <option value="ET">ET</option>
+      <option value="WI">WI</option>
+      <option value="MCD">MCD</option>
+    </select>
+    <label for="gender"></label>
+    <select id="gender">
+      <option value="both">all</option>
+      <option value="male">male</option>
+      <option value="female">female</option>
+    </select>
+  </div>
   <div id="navbar-title">Settings</div>
   <div id="navbar-buttons">
     <button id="start">Start</button>
@@ -43,7 +107,7 @@
 <br>
 <div id="students">
   {% for student in students %}
-    <div class="student">
+    <div class="student {{ student.major }} {{ student.gender }}">
       <img src="{{ student.image_path }}" class="student"
            id="{{ student.id }}" width="150px" height="150px"/>
       <br>
@@ -51,34 +115,5 @@
     </div>
   {% endfor %}
 </div>
-<script>
-    $(function () {
-        $('#stop').click(function () {
-            const btn_start = $('#start');
-            const btn_stop = $(this);
-            const time = 7000;
-            let count = Math.round(time / 1000);
-            const text = 'Please wait ';
-            btn_start.prop('disabled', true);
-            btn_stop.prop('disabled', true);
-            let text_temp = text + count + ' sec';
-            btn_start.html(text_temp);
-            btn_stop.html(text_temp);
-            const countInterval = window.setInterval(function () {
-                count--;
-                text_temp = text + count + ' sec';
-                btn_start.html(text_temp);
-                btn_stop.html(text_temp);
-            }, 1000);
-            window.setTimeout(function () {
-                btn_start.html('Start');
-                btn_stop.html('Stop');
-                btn_start.prop('disabled', false);
-                btn_stop.prop('disabled', false);
-                clearInterval(countInterval);
-            }, time);
-        });
-    });
-</script>
 </body>
 </html>

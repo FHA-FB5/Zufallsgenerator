@@ -10,6 +10,11 @@ div#navbar {
     grid-template-columns: repeat(3, 1fr);
 }
 
+div#navbar-sort {
+    display: unset;
+    margin: auto auto auto 2%;
+}
+
 div#navbar-title {
     color: #aa9972;
     font-size: 2em;
