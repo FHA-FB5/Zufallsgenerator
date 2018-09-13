@@ -1,4 +1,4 @@
-div#navbar{
+div#navbar {
     top: 0;
     left: 0;
     position: fixed;
@@ -10,26 +10,26 @@ div#navbar{
     grid-template-columns: repeat(3, 1fr);
 }
 
-div#navbar-title{
+div#navbar-title {
     color: #aa9972;
     font-size: 2em;
     margin: auto;
 }
 
-div#navbar-buttons{
+div#navbar-buttons {
     margin: auto 2% auto auto;
 }
 
-div#students{
+div#students {
     margin-top: 2%;
     text-align: center;
 }
 
-img.student{
+img.student {
     border: 3px lightblue solid;
 }
 
-div.student{
+div.student {
     display: inline-block;
     margin: 10px;
     font-size: 13px;
@@ -42,33 +42,29 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
+    position: fixed;
 }
-body#show{
-    background: url("background.jpg") no-repeat center center;
-    background-size: 100% 100%;
+
+body#show {
+    background: url("background.jpg") no-repeat;
+    background-size: 100vw 100vh;
 }
-#img_left{
+
+#img_left {
     position: relative;
     top: 250px;
     left: 50px;
     float: left;
 }
-#img_right{
+
+#img_right {
     position: relative;
     top: 250px;
     right: 50px;
     float: right;
 }
-.row{
-    overflow: hidden;
-}
 
-#wheel{
-    display: flex;
-    height: 12vh;
-    justify-content: center;
-}
-#images{
+#images {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -77,10 +73,11 @@ body#show{
     margin-right: auto;
     left: 0;
     right: 0;
-    top: 120px
+    top: 0;
+    display: none;
 }
-#images div{
-    height: 500px;
+
+#images div {
     overflow: hidden;
     width: 750px;
     margin: 0 auto;
@@ -88,40 +85,31 @@ body#show{
     -moz-box-shadow: 0 10px 6px -6px #777;
     box-shadow: 0 10px 6px -6px #777;
 }
-#images img{
+
+#images img {
+    top: 120px;
     height: 500px;
     width: 750px;
-    will-change: transform;
 }
-#images .spinning img{
-    animation-name: images;
-    animation-duration: .6s;
+
+.spin {
+    animation-name: spin;
+    animation-duration: 30s;
     animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
 }
-#wheel .wheelImages > div.spinning img{
-    -webkit-animation: wheel .2s infinite;
-    animation: wheel .2s infinite;
-}
-@keyframes images{
-      0%{ transform: translateY( 0px );     }
-     10%{ transform: translateY( -350px );  }
-     20%{ transform: translateY( -700px ); }
-     30%{ transform: translateY( -1050px ); }
-     40%{ transform: translateY( -1400px ); }
-     50%{ transform: translateY( -1750px ); }
-     60%{ transform: translateY( -2100px ); }
-     70%{ transform: translateY( -2450px ); }
-     80%{ transform: translateY( -2800px ); }
-     90%{ transform: translateY( -3150px ); }
-    100%{ transform: translateY( 0px );     }
-}
-@keyframes wheel{
-    100%{
-        -webkit-transform: translateY( -50% );
-        transform: translateY( -50% );
+
+@keyframes spin {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(-100%);
     }
 }
-#winner_images{
+
+#winner_images {
     height: 500px;
     width: 750px;
     position: absolute;
@@ -131,7 +119,8 @@ body#show{
     right: 0;
     top: 120px
 }
-#winner_images img{
+
+#winner_images img {
     height: 500px;
     width: 750px;
     z-index: 1000;
