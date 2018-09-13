@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <title>Show</title>
   <link rel="stylesheet" type="text/css"
-        href={{ url_for('static', filename='stylesheet.css') }}>
-  <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+        href={{ url_for('static', filename='show.css') }}>
+  <script
+      src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
   <script src="{{ url_for('static', filename='wheel.js') }}"></script>
   <script>
       // noinspection JSAnnotator
       const students_size = {{ students|length }};
       $(document).ready(function () {
-          console.log(students_size);
           let socket = io.connect(
               location.protocol + '//' + document.domain + ':' + location.port
           );
 
           socket.on('start', function () {
               let stage = $('#stage');
-              console.log(stage.html());
               stage.html('Running');
               wheel_start();
           });
@@ -47,24 +47,18 @@
 </audio>
 
 <img src="{{ url_for('static', filename='wizard.gif') }}" id="img_left">
-
-<div id="images">
-  <div>
-    {% for student in students %}
-      <img class="image" id="{{ student.id }}" src="{{ student.image_path }}">
-    {% endfor %}
-  </div>
-</div>
-
 <img src="{{ url_for('static', filename='wizard.gif') }}" id="img_right">
 
-<div id="winner_images">
-  <div>
-    {% for student in students %}
-      <img class="winner_image" id="{{ student.id }}"
-           src="{{ student.image_path }}">
-    {% endfor %}
-  </div>
+<div id="images">
+  {% for student in students %}
+    <img class="image" src="{{ student.image_path }}" id="{{ student.id }}">
+  {% endfor %}
+</div>
+
+<div id="winners">
+  {% for student in students %}
+    <img class="winner_img" src="{{ student.image_path }}" id="{{ student.id }}">
+  {% endfor %}
 </div>
 
 </body>

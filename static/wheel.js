@@ -12,10 +12,6 @@ $(document).ready(function () {
     sound_wheel_j = $('#sound_wheel');
     sound_winner_j = $('#sound_winner');
     images = $('#images');
-
-    $('#wheel .wheelImages').on('click', function () {
-        wheel_start();
-    });
 });
 
 function wheel_start() {
