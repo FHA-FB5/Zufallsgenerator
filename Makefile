@@ -9,15 +9,15 @@ all:
 
 install:
 	( \
-	virtualenv venv; \
-	source ${PWD}/venv/bin/activate; \
+	virtualenv venv -p python3; \
+	. ${PWD}/venv/bin/activate; \
 	pip install -r requirements.txt; \
 	)
 
 run:
 	( \
 	. ${PWD}/venv/bin/activate; \
-	python3 main.py; \
+	python main.py; \
 	)
 
 mrproper:
