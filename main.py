@@ -74,4 +74,4 @@ if __name__ == '__main__':
         student = Student(index, ' '.join(name),
                           major, f'static/students/{image}')
         students.append(student.__dict__)
-    socketio.run(app, debug=True)
+    socketio.run(app, port=5000)
