@@ -34,6 +34,7 @@
 img.image {
     display: block;
     margin: 5vh auto;
+    animation: spin 5s infinite linear;
 }
 
 #winners {
@@ -49,19 +50,43 @@ img.winner_img {
     display: none;
 }
 
-.spin {
-    animation-name: spin;
-    animation-duration: 50s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+#images div {
+    animation: move_around 5s infinite ease-in-out forwards;
+}
+
+.wheel {
+    animation: wheel 50s infinite linear forwards;
+}
+
+@keyframes wheel {
+    from {
+        transform: translateY(100vh);
+    }
+    to {
+        transform: translateY(-100%);
+    }
 }
 
 @keyframes spin {
+    from {
+        transform: rotateY(0deg) rotateZ(0deg);
+    }
+    to {
+        transform: rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+@keyframes move_around {
     0% {
-        transform: translateY(100vh);
+        transform: translateX(0);
+    }
+    33% {
+        transform: translateX(-20vw);
+    }
+    67% {
+        transform: translateX(20vw);
     }
     100% {
-        transform: translateY(-100%);
+        transform: translateX(0);
     }
 }

@@ -21,7 +21,7 @@ function wheel_start() {
     let winner = $('.winner').fadeOut(1000);
     setTimeout(function () {
         winner.removeClass('winner');
-        images.addClass('spin').fadeIn(1000);
+        images.addClass('wheel').fadeIn(1000);
     }, 1000);
 }
 
@@ -31,7 +31,7 @@ function wheel_stop(id) {
     sound_wheel_j.animate({volume: 0.0}, 3500);
     images.fadeOut(2000);
     setTimeout(function () {
-        images.removeClass('spin');
+        images.removeClass('wheel');
         winner.fadeIn(3000);
         setTimeout(function () {
             sound_cheer.play();
