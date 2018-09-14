@@ -27,7 +27,6 @@ div#navbar-buttons {
 
 div#students {
     margin-top: 2%;
-    text-align: center;
 }
 
 img.student {
@@ -38,4 +37,5 @@ div.student {
     display: inline-block;
     margin: 10px;
     font-size: 13px;
+    text-align: center;
 }
