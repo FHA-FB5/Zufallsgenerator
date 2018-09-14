@@ -8,23 +8,28 @@
     margin: 0;
 }
 
-#img_left, #img_right {
+.animated {
     position: relative;
     z-index: -1;
     top: 35vh;
-    transform: translateY(-50%);
+}
+
+.move#img_left {
+    animation: wizard_left 2s infinite ease-in-out alternate;
+}
+
+.move#img_right {
+    animation: wizard_right 2s infinite ease-in-out alternate;
 }
 
 #img_left {
     margin-left: 5vw;
     float: left;
-    animation: wizard_left 2s infinite ease-in-out alternate;
 }
 
 #img_right {
     margin-right: 5vw;
     float: right;
-    animation: wizard_right 2s infinite ease-in-out alternate;
 }
 
 #images {
@@ -53,11 +58,11 @@ img.winner_img {
 }
 
 #images div {
-    animation: move_around 5s infinite ease-in-out forwards;
+    animation: move_around 5s infinite ease-in-out;
 }
 
 .wheel {
-    animation: wheel 50s infinite linear forwards;
+    animation: wheel 50s infinite linear alternate;
 }
 
 @keyframes wheel {
@@ -98,9 +103,9 @@ img.winner_img {
 
 @keyframes wizard_right {
     from {
-        transform: rotate(30deg) translateY(80%) skew(-20deg);
+        transform: rotate(-30deg) translateY(-80%) skew(20deg);
     }
     to {
-        transform: rotate(-30deg) translateY(-80%) skew(20deg);
+        transform: rotate(30deg) translateY(80%) skew(-20deg);
     }
 }
