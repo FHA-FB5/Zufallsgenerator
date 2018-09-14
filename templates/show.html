@@ -6,9 +6,9 @@
   <link rel="stylesheet" type="text/css"
         href={{ url_for('static', filename='show.css') }}>
   <script
-      src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+          src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
   <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+          src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
   <script src="{{ url_for('static', filename='wheel.js') }}"></script>
   <script>
       // noinspection JSAnnotator
@@ -59,7 +59,8 @@
 
 <div id="winners">
   {% for student in students %}
-    <img class="winner_img" src="{{ student.image_path }}" id="{{ student.id }}">
+    <img class="winner_img" src="{{ student.image_path }}"
+         id="{{ student.id }}">
   {% endfor %}
 </div>
 
