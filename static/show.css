@@ -11,18 +11,20 @@
 #img_left, #img_right {
     position: relative;
     z-index: -1;
-    top: 50vh;
+    top: 35vh;
     transform: translateY(-50%);
 }
 
 #img_left {
     margin-left: 5vw;
     float: left;
+    animation: wizard_left 2s infinite ease-in-out alternate;
 }
 
 #img_right {
     margin-right: 5vw;
     float: right;
+    animation: wizard_right 2s infinite ease-in-out alternate;
 }
 
 #images {
@@ -77,16 +79,28 @@ img.winner_img {
 }
 
 @keyframes move_around {
-    0% {
-        transform: translateX(0);
-    }
     33% {
         transform: translateX(-20vw);
     }
     67% {
         transform: translateX(20vw);
     }
-    100% {
-        transform: translateX(0);
+}
+
+@keyframes wizard_left {
+    from {
+        transform: rotate(-30deg) translateY(80%) skew(20deg);
+    }
+    to {
+        transform: rotate(30deg) translateY(-80%) skew(-20deg);
+    }
+}
+
+@keyframes wizard_right {
+    from {
+        transform: rotate(30deg) translateY(80%) skew(-20deg);
+    }
+    to {
+        transform: rotate(-30deg) translateY(-80%) skew(20deg);
     }
 }
