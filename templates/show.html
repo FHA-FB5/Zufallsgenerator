@@ -29,6 +29,16 @@
               wheel_stop(parseInt(message.winner));
           });
 
+          $(document).keypress(function (event) {
+              switch (event.key) {
+                  case 's':
+                      wheel_start();
+                      break;
+                  case 'p':
+                      wheel_stop(0);
+                      break;
+              }
+          })
       });
   </script>
 </head>
