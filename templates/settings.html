@@ -59,10 +59,8 @@
               let gender = $('#gender :selected').text();
               $('#students div').each(function () {
                   console.log($(this).hasClass(major));
-                  if ((gender === 'all' && major === 'all') ||
-                      (gender === 'all' && $(this).hasClass(major)) ||
-                      ($(this).hasClass(gender) && major === 'all') ||
-                      ($(this).hasClass(gender) && $(this).hasClass(major))) {
+                  if (($(this).hasClass(gender) || gender === 'all') &&
+                      ($(this).hasClass(major) || major === 'all')) {
                       $(this).css({
                           display: 'inline-block'
                       })
