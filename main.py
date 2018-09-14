@@ -14,13 +14,13 @@ students = None
 
 
 class Student:
-    def __init__(self, student_id: int, name: str, major: str,
+    def __init__(self, student_id: int, name: str, major: str, gender: str,
                  image_path: str):
         self.id = student_id
         self.name = name
         self.major = major
         self.image_path = image_path
-        self.gender = choice(['male', 'female'])
+        self.gender = gender
 
 
 @app.route('/')
@@ -71,8 +71,8 @@ if __name__ == '__main__':
     images: List[str] = listdir(join(STATIC_DIR, 'students'))
     students = list()
     for index, image in enumerate(images):
-        *name, major = image.split('.')[0].split('_')
-        student = Student(index, ' '.join(name),
-                          major, f'static/students/{image}')
-        students.append(student.__dict__)
+        *name, major, gender = image.split('.')[0].split('_')
+        student = Student(index, ' '.join(name), major, gender,
+                          join('static', 'students', image))
+        students.append(vars(student))
     socketio.run(app, port=5000, debug=True)
