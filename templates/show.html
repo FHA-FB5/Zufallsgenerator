@@ -1,35 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Show</title>
-    <link rel="stylesheet" type="text/css"
-          href={{ url_for('static', filename='stylesheet.css') }}>
-    <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script>
-        $(document).ready(function () {
-            let socket = io.connect(
-                location.protocol + '//' + document.domain + ':' + location.port
-            );
+  <meta charset="UTF-8">
+  <title>Show</title>
+  <link rel="stylesheet" type="text/css"
+        href={{ url_for('static', filename='show.css') }}>
+  <script
+      src={{ url_for('static', filename='jquery.min.js') }}></script>
+  <script
+      src={{ url_for('static', filename='socket.io.min.js') }}></script>
+  <script src="{{ url_for('static', filename='wheel.js') }}"></script>
+  <script>
+      // noinspection JSAnnotator
+      const students_size = {{ students|length }};
+      $(document).ready(function () {
+          let socket = io.connect(
+              location.protocol + '//' + document.domain + ':' + location.port
+          );
 
-            socket.on('start', function () {
-                let stage = $('#stage');
-                console.log(stage.html());
-                stage.html('Running')
-            });
+          socket.on('start', function () {
+              let stage = $('#stage');
+              stage.html('Running');
+              wheel_start();
+          });
 
-            socket.on('stop', function (message) {
-                $('#stage').html('Completed<br> Winner is ' + message.winner)
-            });
+          socket.on('stop', function (message) {
+              $('#stage').html('Completed<br> Winner is ' + message.winner);
+              wheel_stop(parseInt(message.winner));
+          });
 
-        });
-    </script>
+          $(document).keypress(function (event) {
+              switch (event.key) {
+                  case 's':
+                      wheel_start();
+                      break;
+                  case 'p':
+                      wheel_stop(0);
+                      break;
+              }
+          })
+      });
+  </script>
 </head>
-<body>
-<div id="main">
-    <h2>This is the show page</h2><br>
-    <div id="stage">Not running</div>
+<body id="show">
+<audio id="sound_wheel" loop>
+  <source src="{{ url_for('static', filename='sound.mp3') }}"
+          type="audio/mpeg">
+</audio>
+<audio id="sound_winner">
+  <source src="{{ url_for('static', filename='winner.mp3') }}"
+          type="audio/mpeg">
+</audio>
+<audio id="sound_cheer">
+  <source src="{{ url_for('static', filename='cheering.mp3') }}"
+          type="audio/mpeg">
+</audio>
+
+<img src="{{ url_for('static', filename='wizard-left.gif') }}" id="img_left"
+     class="animated move">
+<img src="{{ url_for('static', filename='wizard-right.gif') }}" id="img_right"
+     class="animated move">
+
+<div id="images">
+  {% for student in students %}
+    <div>
+      <img class="image" src="{{ student.image_path }}" id="{{ student.id }}">
+    </div>
+  {% endfor %}
 </div>
+
+<div id="winners">
+  {% for student in students %}
+    <img class="winner_img" src="{{ student.image_path }}"
+         id="{{ student.id }}">
+  {% endfor %}
+</div>
+
 </body>
 </html>

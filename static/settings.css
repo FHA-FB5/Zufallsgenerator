@@ -1,4 +1,4 @@
-div#navbar{
+div#navbar {
     top: 0;
     left: 0;
     position: fixed;
@@ -10,27 +10,32 @@ div#navbar{
     grid-template-columns: repeat(3, 1fr);
 }
 
-div#navbar-title{
+div#navbar-sort {
+    display: unset;
+    margin: auto auto auto 2%;
+}
+
+div#navbar-title {
     color: #aa9972;
     font-size: 2em;
     margin: auto;
 }
 
-div#navbar-buttons{
+div#navbar-buttons {
     margin: auto 2% auto auto;
 }
 
-div#students{
+div#students {
     margin-top: 2%;
-    text-align: center;
 }
 
-img.student{
+img.student {
     border: 3px lightblue solid;
 }
 
-div.student{
+div.student {
     display: inline-block;
     margin: 10px;
     font-size: 13px;
+    text-align: center;
 }
