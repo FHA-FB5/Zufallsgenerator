@@ -107,7 +107,7 @@
   {% for student in students %}
     <div class="student {{ student.major }} {{ student.gender }}">
       <img src="{{ student.image_path }}" class="student"
-           id="{{ student.id }}" width="150px" height="150px"/>
+           id="{{ student.id }}"/>
       <br>
       {{ student.name }}
     </div>

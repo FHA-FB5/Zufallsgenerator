@@ -39,3 +39,7 @@ div.student {
     font-size: 13px;
     text-align: center;
 }
+
+img.student {
+    height: 15rem;
+}
