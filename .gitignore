@@ -68,7 +68,7 @@ fabric.properties
 !.vscode/extensions.json
 ### Python template
 # Byte-compiled / optimized / DLL files
-__pycache__/
+#__pycache__/
 *$py.class
 
 # Distribution / packaging
@@ -131,13 +131,13 @@ instance/
 docs/_build/
 
 # PyBuilder
-target/
+# target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
 # pyenv
-.python-version
+# .python-version
 
 # celery beat schedule file
 celerybeat-schedule
@@ -147,9 +147,9 @@ celerybeat-schedule
 
 # Environments
 .env
-.venv
+#.venv
 env/
-venv/
+#venv/
 ENV/
 env.bak/
 venv.bak/
@@ -165,5 +165,5 @@ venv.bak/
 /site
 
 # mypy
-.mypy_cache/
+#.mypy_cache/
 
