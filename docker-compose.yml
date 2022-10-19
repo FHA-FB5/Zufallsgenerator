@@ -1,0 +1,10 @@
+version: '3'
+services:
+  aloharng:
+    image: ghcr.io/fsr5-fhaachen/aloharng:gerolstein2022
+    container_name: aloharng
+    restart: unless-stopped
+    volumes:
+      - /opt/aloharng/students:/opt/app/static/students:ro
+    ports:
+      - "5000:5000"

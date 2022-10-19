@@ -75,4 +75,4 @@ if __name__ == '__main__':
         student = Student(index, ' '.join(name), major, gender,
                           join('static', 'students', image))
         students.append(vars(student))
-    socketio.run(app, port=5000, debug=True)
+    socketio.run(app, port=5000, debug=True, host='0.0.0.0')
